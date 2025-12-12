@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lani - Presentación Comercial</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Iconos -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            /* Evita scroll, es una presentación */
+            background-color: #0f172a;
+            /* Slate-900 fondo general */
+        }
+
+        /* Contenedor principal de slides */
+        .slider-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        /* Cada Slide individual */
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+            transform: scale(0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8fafc;
+            /* Slate-50 fondo de slide */
+            pointer-events: none;
+            /* Evita clicks en slides ocultos */
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 10;
+            pointer-events: all;
+        }
+
+        /* Estilos específicos para imágenes */
+        .mockup-shadow {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Estilo para el contenedor de Onboarding */
+        .onboarding-item {
+            position: relative;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        /* Estilo para el texto flotante de Onboarding */
+        .onboarding-tooltip {
+            position: absolute;
+            top: -50px;
+            /* Posicionado sobre la imagen */
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e293b;
+            /* Slate-800 */
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease, top 0.3s ease;
+            z-index: 50;
+        }
+
+        .onboarding-item:hover .onboarding-tooltip {
+            opacity: 1;
+            top: -60px;
+            /* Desplazamiento sutil al hacer hover */
+        }
+
+
+        /* Navegación */
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #1e293b;
+            padding: 1rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: #f97316;
+            /* Orange-500 */
+            color: white;
+            border-color: #f97316;
+        }
+
+        .prev-btn {
+            left: 2rem;
+        }
+
+        .next-btn {
+            right: 2rem;
+        }
+
+        /* Barra de progreso */
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 6px;
+            background: #f97316;
+            transition: width 0.3s ease;
+            z-index: 30;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 90%;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.open .modal-content {
+            transform: scale(1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Modal de Contacto -->
+    <div id="contact-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-2xl font-bold text-slate-800">Contacto Directo</h3>
+                <button onclick="closeModal()" class="text-slate-500 hover:text-slate-800 transition">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <p class="text-slate-600 mb-6">Estamos listos para conversar sobre el futuro de tu negocio.</p>
+
+            <div class="space-y-4">
+                <!-- Contacto 1: Rolando Granera -->
+                <div class="p-3 bg-blue-50 rounded-lg flex items-center justify-between">
+                    <div>
+                        <p class="font-semibold text-slate-900">Rolando Granera</p>
+                        <p class="text-sm text-blue-600">CEO</p>
+                    </div>
+                    <a href="tel:+50588120420"
+                        class="text-blue-600 font-medium flex items-center gap-1 hover:text-blue-700">
+                        <i data-lucide="phone" class="w-4 h-4"></i>
+                        +505 88120420
+                    </a>
+                </div>
+
+                <!-- Contacto 2: Raquel Acuña -->
+                <div class="p-3 bg-green-50 rounded-lg flex items-center justify-between">
+                    <div>
+                        <p class="font-semibold text-slate-900">Raquel Acuña</p>
+                        <p class="text-sm text-green-600">CIO</p>
+                    </div>
+                    <a href="tel:+50589933229"
+                        class="text-green-600 font-medium flex items-center gap-1 hover:text-green-700">
+                        <i data-lucide="phone" class="w-4 h-4"></i>
+                        +505 8993 3229
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="slider-container">
+        <!-- Barra de progreso -->
+        <div class="progress-bar" id="progress"></div>
+
+        <!-- Botones de Navegación -->
+        <button class="nav-btn prev-btn" onclick="changeSlide(-1)">
+            <i data-lucide="chevron-left"></i>
+        </button>
+        <button class="nav-btn next-btn" onclick="changeSlide(1)">
+            <i data-lucide="chevron-right"></i>
+        </button>
+
+        <!-- INDICADOR DE SLIDE Y TÍTULO (Flotante) -->
+        <div id="slide-indicator"
+            class="fixed bottom-4 right-4 z-50 px-4 py-2 bg-white/70 backdrop-blur-sm rounded-xl shadow-xl text-slate-700 border border-slate-200">
+            <span class="font-bold" id="current-slide-number"></span> / <span class="font-bold"
+                id="total-slide-count"></span>
+            <span class="ml-3 text-sm font-medium text-slate-500" id="current-slide-title"></span>
+        </div>
+
+        <!-- SLIDE 1: PORTADA -->
+        <!-- Guion: "Sabemos que el problema no es solo vender, es tener el control. Lani pone tu negocio en tus manos para que dejes de apagar fuegos y empieces a planear el futuro." -->
+        <div class="slide active" data-title="Portada y Propuesta de Valor">
+            <div class="max-w-6xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 bg-orange-100 text-orange-700 rounded-full text-sm font-bold tracking-wide uppercase">
+                        <!-- Logo Lani integrado en la portada -->
+                        <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/lani.PNG"
+                            alt="[Image of Lani Logo]" class="w-6 h-6 object-contain">
+                        Presentación Comercial
+                    </div>
+                    <h1 class="text-6xl font-extrabold text-slate-900 leading-tight">
+                        Lani: El Ecosistema <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">
+                            Dual para PYMES
+                        </span>
+                    </h1>
+                    <p class="text-xl text-slate-600 leading-relaxed">
+                        El problema no es solo vender, es tener el control. Lani pone tu negocio en tus manos para que
+                        dejes de apagar fuegos y empieces a planear el futuro.
+                    </p>
+                    <p class="text-lg font-semibold text-slate-700">
+                        Resolvemos: <strong>1. Organización Interna</strong> (Gestión) y <strong>2. Crecimiento de
+                            Ventas</strong> (Marketplace)
+                    </p>
+                </div>
+                <div class="relative flex justify-center">
+                    <!-- Decoración -->
+                    <div
+                        class="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-orange-500/20 rounded-full blur-3xl">
+                    </div>
+                    <!-- Usamos la primera imagen de onboarding como héroe visual -->
+                    <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Onboarding/01.png"
+                        class="relative w-64 rounded-3xl mockup-shadow rotate-3 hover:rotate-0 transition-transform duration-500"
+                        alt="">
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: ONBOARDING (Grid de 6) -->
+        <!-- Guion: "La barrera número uno es la complejidad. Lani rompe eso. Mira esto: 4 pasos simples. Registro con celular (sin correos complejos), eliges tu rubro (Retail, Comida), defines tu categoría y listo. En 2 minutos el cliente está dentro." -->
+        <div class="slide" data-title="Registro y Onboarding Sin Fricción">
+            <div class="max-w-7xl mx-auto px-4 w-full h-full flex flex-col justify-center">
+                <div class="text-center mb-8">
+                    <h2 class="text-4xl font-bold text-slate-900">Onboarding sin Fricción</h2>
+                    <p class="text-lg text-slate-600">Tu negocio listo para vender y gestionar en 6 pasos simples.</p>
+                </div>
+
+                <div class="grid grid-cols-6 gap-4 items-end justify-items-center h-[500px]">
+                    <!-- Item 01 -->
+                    <div class="onboarding-item flex flex-col items-center gap-2 group">
+                        <span class="onboarding-tooltip">Paso 1: Regístrate Gratis</span>
+                        <span class="text-sm font-bold text-orange-500 bg-orange-50 px-2 py-1 rounded-full">01.
+                            Inicio</span>
+                        <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Onboarding/01.png"
+                            class="h-64 object-contain rounded-xl mockup-shadow group-hover:h-80 transition-all duration-300"
+                            alt="">
+                    </div>
+                    <!-- Item 02 -->
+                    <div class="onboarding-item flex flex-col items-center gap-2 group">
+                        <span class="onboarding-tooltip">Paso 2: Usa tu Teléfono (Fácil y Rápido)</span>
+                        <span class="text-sm font-bold text-orange-500 bg-orange-50 px-2 py-1 rounded-full">02.
+                            Registro</span>
+                        <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Onboarding/02.png"
+                            class="h-64 object-contain rounded-xl mockup-shadow group-hover:h-80 transition-all duration-300"
+                            alt="">
+                    </div>
+                    <!-- Item 03 -->
+                    <div class="onboarding-item flex flex-col items-center gap-2 group">
+                        <span class="onboarding-tooltip">Paso 3: Elige tu Rubro (Retail, Comida, Servicios)</span>
+                        <span class="text-sm font-bold text-orange-500 bg-orange-50 px-2 py-1 rounded-full">03.
+                            Rubro</span>
+                        <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Onboarding/03.png"
+                            class="h-64 object-contain rounded-xl mockup-shadow group-hover:h-80 transition-all duration-300"
+                            alt="">
+                    </div>
+                    <!-- Item 04 -->
+                    <div class="onboarding-item flex flex-col items-center gap-2 group">
+                        <span class="onboarding-tooltip">Paso 4: Define tu Categoría (Personaliza la experiencia)</span>
+                        <span class="text-sm font-bold text-orange-500 bg-orange-50 px-2 py-1 rounded-full">04.
+                            Categoría</span>
+                        <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Onboarding/04.png"
+                            class="h-64 object-contain rounded-xl mockup-shadow group-hover:h-80 transition-all duration-300"
+                            alt="">
+                    </div>
+                    <!-- Item 05 -->
+                    <div class="onboarding-item flex flex-col items-center gap-2 group">
+                        <span class="onboarding-tooltip">Paso 5: Nombre y Ubicación de tu Tienda</span>
+                        <span class="text-sm font-bold text-orange-500 bg-orange-50 px-2 py-1 rounded-full">05.
+                            Tienda</span>
+                        <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Onboarding/05.png"
+                            class="h-64 object-contain rounded-xl mockup-shadow group-hover:h-80 transition-all duration-300"
+                            alt="">
+                    </div>
+                    <!-- Item 06 -->
+                    <div class="onboarding-item flex flex-col items-center gap-2 group">
+                        <span class="onboarding-tooltip">Paso 6: ¡En la App en menos de 2 minutos!</span>
+                        <span class="text-sm font-bold text-orange-500 bg-orange-50 px-2 py-1 rounded-full">06.
+                            ¡Listo!</span>
+                        <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Onboarding/06.png"
+                            class="h-64 object-contain rounded-xl mockup-shadow group-hover:h-80 transition-all duration-300"
+                            alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: DASHBOARDS (Salud del Negocio) -->
+        <!-- Guion: "Aquí está el valor inmediato (ROI). En lugar de sumar facturas en un cuaderno al final del día, Lani te dice tu 'Salud Financiera' en tiempo real: Ventas vs. Gastos. Inventario bajo control. Esto es paz mental para el dueño." -->
+        <div class="slide" data-title="Roles Inteligentes y Dashboards">
+            <div class="max-w-7xl mx-auto px-8 w-full">
+                <div class="text-center mb-10">
+                    <h2 class="text-4xl font-bold text-slate-900">Salud del Negocio en Tiempo Real</h2>
+                    <p class="text-lg text-slate-600">Paz mental para el dueño: Visibilidad completa de ganancias,
+                        gastos e inventario.</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-12">
+                    <!-- Admin -->
+                    <div class="bg-white p-6 rounded-2xl shadow-xl border-t-4 border-blue-600 flex flex-col">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2 bg-blue-100 rounded-lg text-blue-600"><i data-lucide="briefcase"></i></div>
+                            <h3 class="text-xl font-bold text-slate-800">Vista Dueño (Salud Financiera)</h3>
+                        </div>
+                        <!-- Contenedor con altura fija (h-96) para consistencia -->
+                        <div class="bg-slate-100 rounded-lg overflow-hidden border border-slate-200 h-96 flex-grow-0">
+                            <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Dasboard/admin.png"
+                                class="w-full h-full object-contain" alt="[Image of Admin Dashboard]">
+                        </div>
+                        <p class="mt-4 text-sm text-slate-500">Ventas vs. Gastos. Inventario bajo control. Deja de sumar
+                            facturas y empieza a planear.</p>
+                    </div>
+
+                    <!-- Cajero -->
+                    <div class="bg-white p-6 rounded-2xl shadow-xl border-t-4 border-green-500 flex flex-col">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2 bg-green-100 rounded-lg text-green-600"><i data-lucide="shopping-cart"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800">Vista Cajero (POS Móvil)</h3>
+                        </div>
+                        <!-- Contenedor con altura fija (h-96) para consistencia -->
+                        <div class="bg-slate-100 rounded-lg overflow-hidden border border-slate-200 h-96 flex-grow-0">
+                            <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Dasboard/cajero.png"
+                                class="w-full h-full object-contain" alt="">
+                        </div>
+                        <p class="mt-4 text-sm text-slate-500">Interfaz rápida enfocada solo en facturación y control de
+                            caja.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: PRODUCTOS (Inventario) -->
+        <div class="slide" data-title="Gestión de Inventario y Catálogo">
+            <div class="max-w-6xl mx-auto px-8 w-full grid grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <h2 class="text-4xl font-bold text-slate-900">Gestión de Inventario</h2>
+                    <p class="text-lg text-slate-600">
+                        Transforma estanterías físicas en un catálogo digital. Toma una foto, pon el precio y
+                        automáticamente se sincroniza con el
+                        <span class="text-orange-500 font-bold">Marketplace Lani</span>.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check-circle" class="text-green-500"></i>
+                            <span>Catálogo Visual (Img 01)</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check-circle" class="text-green-500"></i>
+                            <span>Detalle de Costos y Precios (Img 02)</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="flex gap-4 justify-center h-[550px]">
+                    <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Product/01.png"
+                        class="h-full object-contain rounded-xl mockup-shadow" alt="">
+                    <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Product/02.png"
+                        class="h-full object-contain rounded-xl mockup-shadow" alt="[Image of Product Details]">
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: ECOSISTEMA DUAL (Fondo Azul) -->
+        <!-- Guion: "Y aquí está la magia. Todo ese inventario que acabas de organizar ya no está 'escondido' en tu bodega. Con un clic, se vuelve visible para todo el territorio en nuestro Marketplace. Unimos la operación con las ventas." -->
+        <div class="slide" data-title="El Ecosistema Dual: Marketplace">
+            <div
+                class="max-w-7xl mx-auto px-8 w-full h-full bg-blue-600 text-white flex flex-col justify-center items-center rounded-xl shadow-2xl m-8">
+                <div class="text-center space-y-8">
+                    <div class="p-4 bg-white/10 rounded-full inline-block">
+                        <i data-lucide="zap" class="w-12 h-12 text-white"></i>
+                    </div>
+                    <h2 class="text-5xl font-extrabold">La Magia del Ecosistema Dual</h2>
+                    <p class="text-2xl font-light max-w-3xl">
+                        Tu inventario, una vez organizado en el módulo de gestión, ya no está "escondido". Con un solo
+                        clic, se vuelve visible para clientes en todo el territorio a través de nuestro Marketplace.
+                    </p>
+                    <p class="text-3xl font-bold text-amber-300">
+                        Unimos tu Operación Interna con el Crecimiento de Ventas.
+                    </p>
+                    <div class="flex justify-center gap-8 pt-4">
+                        <div class="p-4 bg-white/20 rounded-xl flex items-center gap-3">
+                            <i data-lucide="settings" class="w-6 h-6"></i>
+                            <span class="font-semibold">Módulo de Gestión (Control)</span>
+                        </div>
+                        <i data-lucide="arrow-right" class="w-8 h-8 self-center"></i>
+                        <div class="p-4 bg-white/20 rounded-xl flex items-center gap-3">
+                            <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+                            <span class="font-semibold">Marketplace (Crecimiento)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 6: MARKETPLACE (Vista de Comprador y Control de Comerciante) -->
+        <div class="slide" data-title="El Marketplace: Ventas y Control">
+            <div class="max-w-7xl mx-auto px-8 w-full">
+                <div class="text-center mb-10">
+                    <h2 class="text-4xl font-bold text-slate-900">Marketplace: Visibilidad para el Comprador y Control
+                        para el Comerciante</h2>
+                    <p class="text-lg text-slate-600">Fase 2: Conviértete en un líder de ventas en tu región.</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-12">
+                    <!-- Vista Comprador -->
+                    <div class="bg-white p-6 rounded-2xl shadow-xl border-t-4 border-orange-500 flex flex-col">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2 bg-orange-100 rounded-lg text-orange-600"><i data-lucide="user"></i></div>
+                            <h3 class="text-xl font-bold text-slate-800">Vista del Comprador (Front-End)</h3>
+                        </div>
+                        <div class="bg-slate-100 rounded-lg overflow-hidden border border-slate-200 h-96 flex-grow-0">
+                            <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/tienda/01.png"
+                                class="w-full h-full object-contain" alt="">
+                        </div>
+                        <p class="mt-4 text-sm text-slate-500">Un catálogo moderno y accesible que atrae a miles de
+                            clientes.</p>
+                    </div>
+
+                    <!-- Control Comerciante -->
+                    <div class="bg-white p-6 rounded-2xl shadow-xl border-t-4 border-purple-500 flex flex-col">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="p-2 bg-purple-100 rounded-lg text-purple-600"><i data-lucide="trolley"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800">Control de Producto (Back-End)</h3>
+                        </div>
+                        <div class="bg-slate-100 rounded-lg overflow-hidden border border-slate-200 h-96 flex-grow-0">
+                            <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/tienda/02.png"
+                                class="w-full h-full object-contain" alt="">
+                        </div>
+                        <p class="mt-4 text-sm text-slate-500">Gestiona precios, inventario y promociones del
+                            marketplace de forma centralizada.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 7: FLUJO DE VENTAS (POS) -->
+        <div class="slide" data-title="Punto de Venta (POS) Móvil">
+            <div class="max-w-7xl mx-auto px-4 w-full h-full flex flex-col justify-center">
+                <div class="text-center mb-6">
+                    <h2 class="text-3xl font-bold text-slate-900">Punto de Venta (POS) Móvil</h2>
+                    <p class="text-slate-600">Desde la apertura hasta el cobro final.</p>
+                </div>
+
+                <div class="flex gap-4 items-center justify-center overflow-x-auto pb-4">
+                    <!-- Paso 1: Apertura -->
+                    <div class="text-center min-w-[200px]">
+                        <div class="bg-white p-2 rounded-xl shadow-md border border-slate-100 mb-2">
+                            <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/venta/01.png"
+                                class="h-64 mx-auto object-contain rounded-lg" alt="">
+                        </div>
+                        <span class="text-sm font-bold text-slate-700">1. Apertura Caja</span>
+                    </div>
+
+                    <i data-lucide="arrow-right" class="text-slate-300 w-8 h-8"></i>
+
+                    <!-- Paso 2: Selección (Venta 03) -->
+                    <div class="text-center min-w-[200px]">
+                        <div class="bg-white p-2 rounded-xl shadow-md border border-slate-100 mb-2">
+                            <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/venta/03.png"
+                                class="h-64 mx-auto object-contain rounded-lg" alt="">
+                        </div>
+                        <span class="text-sm font-bold text-slate-700">2. Selección</span>
+                    </div>
+
+                    <i data-lucide="arrow-right" class="text-slate-300 w-8 h-8"></i>
+
+                    <!-- Paso 3: Detalle/Cobro (Venta 05) -->
+                    <div class="text-center min-w-[200px]">
+                        <div class="bg-white p-2 rounded-xl shadow-md border border-slate-100 mb-2">
+                            <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/venta/05.png"
+                                class="h-64 mx-auto object-contain rounded-lg" alt="[Image of Payment Success]">
+                        </div>
+                        <span class="text-sm font-bold text-slate-700">3. Cobro Exitoso</span>
+                    </div>
+
+                    <div class="w-px h-64 bg-slate-200 mx-4"></div>
+
+                    <!-- Paso 4: Cierre (Venta 02) -->
+                    <div class="text-center min-w-[200px] opacity-80">
+                        <div class="bg-slate-50 p-2 rounded-xl border border-dashed border-slate-300 mb-2">
+                            <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/venta/02.png"
+                                class="h-64 mx-auto object-contain rounded-lg grayscale" alt="">
+                        </div>
+                        <span class="text-sm font-bold text-slate-500">4. Cierre de Turno</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 8: CIERRE (Marketplace y Call to Action) -->
+        <div class="slide" data-title="Llamada a la Acción">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="mb-8 flex justify-center">
+                    <!-- Logo Lani en el cierre -->
+                    <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/lani.PNG" alt="[Image of Lani Logo]"
+                        class="w-20 h-20 object-contain">
+                </div>
+                <h2 class="text-5xl font-extrabold text-slate-900 mb-6">
+                    ¿Listo para transformar el comercio regional?
+                </h2>
+                <p class="text-xl text-slate-600 mb-12">
+                    Lani combina la simplicidad que las PYMES necesitan con la tecnología que impulsa su crecimiento.
+                </p>
+                <div class="flex justify-center gap-6">
+                    <!-- Botón Descargar App (Abre el mockup de la landing page) -->
+                    <a href="https://dereck48g.github.io/Lani-pick-deck-landing/" target="_blank"
+                        class="bg-slate-900 text-white px-8 py-4 rounded-xl font-bold flex items-center gap-3 hover:bg-slate-800 transition-all hover:scale-105 shadow-xl">
+                        Ver Demo Landing
+                        <i data-lucide="external-link"></i>
+                    </a>
+                    <!-- Botón Contacto (Abre el modal con los números) -->
+                    <button onclick="openModal()"
+                        class="bg-white text-slate-900 border-2 border-slate-200 px-8 py-4 rounded-xl font-bold flex items-center gap-3 hover:border-orange-500 hover:text-orange-500 transition-all">
+                        Contactar Equipo
+                        <i data-lucide="users"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Inicializar Iconos
+        lucide.createIcons();
+
+        // Lógica del Slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const progressBar = document.getElementById('progress');
+        const totalSlides = slides.length;
+        // Elementos del indicador de slide
+        const totalSlideCountEl = document.getElementById('total-slide-count');
+        const currentSlideNumberEl = document.getElementById('current-slide-number');
+        const currentSlideTitleEl = document.getElementById('current-slide-title');
+
+        // Elementos del Modal
+        const contactModal = document.getElementById('contact-modal');
+
+
+        /**
+         * Abre el modal de contacto.
+         */
+        function openModal() {
+            contactModal.classList.add('open');
+            // Re-renderizar iconos en el modal
+            lucide.createIcons();
+        }
+
+        /**
+         * Cierra el modal de contacto.
+         */
+        function closeModal() {
+            contactModal.classList.remove('open');
+        }
+
+        /**
+         * Actualiza el ancho de la barra de progreso.
+         */
+        function updateProgress() {
+            // Calcula el porcentaje basado en la diapositiva actual
+            const width = ((currentSlide + 1) / totalSlides) * 100;
+            progressBar.style.width = width + '%';
+        }
+
+        /**
+         * Muestra la diapositiva en el índice dado, ocultando las demás.
+         * @param {number} index - El índice de la diapositiva a mostrar.
+         */
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) {
+                    slide.classList.add('active');
+                    // Actualiza el indicador de slide
+                    currentSlideNumberEl.textContent = i + 1;
+                    currentSlideTitleEl.textContent = slide.getAttribute('data-title');
+                }
+            });
+            updateProgress();
+        }
+
+        /**
+         * Cambia a la siguiente o anterior diapositiva.
+         * @param {number} direction - 1 para siguiente, -1 para anterior.
+         */
+        function changeSlide(direction) {
+            // Asegúrate de cerrar el modal si está abierto antes de cambiar de slide
+            closeModal();
+
+            let newIndex = currentSlide + direction;
+
+            // Lógica de loop infinito
+            if (newIndex >= totalSlides) {
+                newIndex = 0; // Vuelve al inicio
+            } else if (newIndex < 0) {
+                newIndex = totalSlides - 1; // Vuelve al final
+            }
+
+            currentSlide = newIndex;
+            showSlide(currentSlide);
+        }
+
+        // Event Listeners para navegación con teclado
+        document.addEventListener('keydown', (e) => {
+            // No cambiar de slide si el modal está abierto
+            if (contactModal.classList.contains('open')) return;
+
+            if (e.key === 'ArrowRight') {
+                changeSlide(1); // Siguiente
+            } else if (e.key === 'ArrowLeft') {
+                changeSlide(-1); // Anterior
+            } else if (e.key === 'Escape') {
+                closeModal(); // Cierra el modal con ESC
+            }
+        });
+
+        // Inicializa la presentación al cargar la ventana
+        window.onload = () => {
+            // Inicializa el contador total
+            totalSlideCountEl.textContent = totalSlides;
+            showSlide(currentSlide);
+        };
+    </script>
+</body>
+
+</html>
