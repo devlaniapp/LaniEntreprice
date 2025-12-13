@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lani - Presentación Comercial</title>
     
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS (Framework de estilos) -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Iconos -->
+    <!-- Iconos de Lucide (usados en toda la presentación) -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
-    <!-- Fuentes -->
+    <!-- Fuentes: Plus Jakarta Sans (Para un look moderno) -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
     <style>
@@ -20,7 +20,7 @@
             margin: 0;
             padding: 0;
             overflow: hidden; 
-            background-color: #0f172a; /* Slate-900 fondo general */
+            background-color: #0f172a; /* Fondo general oscuro */
         }
 
         /* Contenedor principal de slides */
@@ -30,7 +30,7 @@
             height: 100vh;
         }
 
-        /* Cada Slide individual */
+        /* Estilo para cada Slide individual */
         .slide {
             position: absolute;
             top: 0;
@@ -43,9 +43,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #f8fafc; /* Slate-50 fondo de slide */
+            background-color: #f8fafc; /* Fondo de slide claro */
             pointer-events: none; 
-            /* Asegura que el contenido interno pueda scrollear si es necesario en móvil */
             padding: 1rem; 
             overflow-y: auto; 
         }
@@ -57,26 +56,24 @@
             pointer-events: all;
         }
 
-        /* Estilos específicos para imágenes */
+        /* Estilos específicos para mockups de teléfono */
         .mockup-shadow {
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             border: 1px solid #e2e8f0;
         }
 
-        /* Estilo para el contenedor de Onboarding */
+        /* Estilo para el contenedor de Onboarding (Tooltip) */
         .onboarding-item {
             position: relative;
             cursor: pointer;
             text-align: center;
         }
-
-        /* Estilo para el texto flotante de Onboarding (Solo aparece en pantallas grandes) */
         .onboarding-tooltip {
             position: absolute;
             top: -50px; 
             left: 50%;
             transform: translateX(-50%);
-            background: #1e293b; /* Slate-800 */
+            background: #1e293b; 
             color: white;
             padding: 6px 10px;
             border-radius: 8px;
@@ -86,15 +83,14 @@
             transition: opacity 0.3s ease, top 0.3s ease;
             z-index: 50;
         }
-
         .onboarding-item:hover .onboarding-tooltip {
             opacity: 1;
             top: -60px; 
         }
 
-        /* Navegación */
+        /* Botones de Navegación */
         .nav-btn {
-            position: fixed; /* Fixed para que se mantenga aunque haya scroll interno en el slide */
+            position: fixed; 
             top: 50%;
             transform: translateY(-50%);
             z-index: 50;
@@ -108,7 +104,7 @@
             transition: all 0.3s;
         }
         .nav-btn:hover {
-            background: #f97316; /* Orange-500 */
+            background: #f97316; /* Color naranja */
             color: white;
             border-color: #f97316;
         }
@@ -120,7 +116,7 @@
             position: fixed;
             bottom: 0;
             left: 0;
-            height: 4px; /* Más delgado en responsive */
+            height: 4px; 
             background: #f97316;
             transition: width 0.3s ease;
             z-index: 60;
@@ -150,10 +146,10 @@
 
         .modal-content {
             background-color: white;
-            padding: 1.5rem; /* Padding responsive */
+            padding: 1.5rem; 
             border-radius: 12px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            max-width: 90%; /* Ajuste a 90% del ancho del viewport */
+            max-width: 90%; 
             width: 400px;
             transform: scale(0.9);
             transition: transform 0.3s ease;
@@ -161,6 +157,31 @@
 
         .modal-overlay.open .modal-content {
             transform: scale(1);
+        }
+        
+        /* Estilos Tarjetas Slide 4 */
+        .alert-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            border: 1px solid #f1f5f9;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Estilo Custom Scrollbar para Slide 5 (Mobile POS) */
+        .custom-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background-color: #cbd5e1;
+            border-radius: 20px;
         }
     </style>
 </head>
@@ -178,7 +199,6 @@
             <p class="text-slate-600 mb-6 text-sm sm:text-base">Estamos listos para conversar sobre el futuro de tu negocio.</p>
             
             <div class="space-y-4">
-                <!-- Contacto 1: Rolando Granera -->
                 <div class="p-3 bg-blue-50 rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between">
                     <div>
                         <p class="font-semibold text-slate-900">Rolando Granera</p>
@@ -189,8 +209,6 @@
                         +505 88120420
                     </a>
                 </div>
-
-                <!-- Contacto 2: Raquel Acuña -->
                 <div class="p-3 bg-green-50 rounded-lg flex flex-col sm:flex-row items-start sm:items-center justify-between">
                     <div>
                         <p class="font-semibold text-slate-900">Raquel Acuña</p>
@@ -205,9 +223,8 @@
         </div>
     </div>
 
-
     <div class="slider-container">
-        <!-- Barra de progreso -->
+        <!-- Barra de Progreso -->
         <div class="progress-bar" id="progress"></div>
 
         <!-- Botones de Navegación -->
@@ -218,10 +235,10 @@
             <i data-lucide="chevron-right" class="w-6 h-6 sm:w-8 sm:h-8"></i>
         </button>
         
-        <!-- INDICADOR DE SLIDE Y TÍTULO (Flotante) -->
+        <!-- Indicador de Slide -->
         <div id="slide-indicator" class="fixed bottom-2 right-2 sm:bottom-4 sm:right-4 z-50 px-3 py-1 sm:px-4 sm:py-2 bg-white/70 backdrop-blur-sm rounded-xl shadow-xl text-slate-700 border border-slate-200 text-xs sm:text-base">
             <span class="font-bold" id="current-slide-number"></span> / <span class="font-bold" id="total-slide-count"></span>
-            <span class="ml-2 text-sm font-medium text-slate-500 hidden sm:inline" id="current-slide-title"></span>
+            <span class="ml-2 text-sm font-medium text-slate-500 hidden md:inline" id="current-slide-title"></span>
         </div>
 
         <!-- SLIDE 1: PORTADA -->
@@ -247,91 +264,85 @@
                 </div>
                 <div class="relative flex justify-center mt-6 lg:mt-0">
                     <div class="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-orange-500/20 rounded-full blur-3xl w-full h-full"></div>
-                    <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Onboarding/01.png" class="relative w-48 sm:w-64 rounded-3xl mockup-shadow rotate-3 hover:rotate-0 transition-transform duration-500" alt="">
+                    <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Onboarding/01.png" class="relative w-48 sm:w-64 rounded-3xl mockup-shadow rotate-3 hover:rotate-0 transition-transform duration-500" alt="" onerror="this.src='https://placehold.co/256x512/f97316/ffffff?text=Lani+App'" />
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 2: ONBOARDING (Responsive Grid) -->
+        <!-- SLIDE 2: ONBOARDING -->
         <div class="slide" data-title="Registro y Onboarding Sin Fricción">
             <div class="max-w-7xl mx-auto px-4 w-full flex flex-col justify-center">
                 <div class="text-center mb-6 sm:mb-8">
                     <h2 class="text-3xl sm:text-4xl font-bold text-slate-900">Onboarding sin Fricción</h2>
                     <p class="text-sm sm:text-lg text-slate-600">Tu negocio listo para vender y gestionar en 6 pasos simples.</p>
                 </div>
-                
-                <!-- Responsividad: 3 columnas en móvil, 6 en escritorio -->
-                <div class="grid grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4 items-end justify-items-center flex-grow">
+                <!-- Ajuste: grid-cols-2 en pantallas muy pequeñas, grid-cols-3 en sm, grid-cols-6 en lg -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-4 items-end justify-items-center flex-grow">
                     <!-- Item 01 -->
                     <div class="onboarding-item flex flex-col items-center gap-1 sm:gap-2 group w-full pt-4">
                         <span class="onboarding-tooltip hidden lg:block">Paso 1: Regístrate Gratis</span>
                         <span class="text-xs font-bold text-orange-500 bg-orange-50 px-2 py-1 rounded-full">01. Inicio</span>
-                        <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Onboarding/01.png" class="h-32 sm:h-48 lg:h-64 object-contain rounded-xl mockup-shadow group-hover:lg:h-80 transition-all duration-300" alt="">
+                        <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Onboarding/01.png" class="h-28 sm:h-48 lg:h-64 object-contain rounded-xl mockup-shadow group-hover:lg:h-80 transition-all duration-300" alt="" onerror="this.src='https://placehold.co/150x300/f97316/ffffff?text=Paso+1'"/>
                     </div>
                     <!-- Item 02 -->
                     <div class="onboarding-item flex flex-col items-center gap-1 sm:gap-2 group w-full pt-4">
-                        <span class="onboarding-tooltip hidden lg:block">Paso 2: Usa tu Teléfono (Fácil y Rápido)</span>
+                        <span class="onboarding-tooltip hidden lg:block">Paso 2: Usa tu Teléfono</span>
                         <span class="text-xs font-bold text-orange-500 bg-orange-50 px-2 py-1 rounded-full">02. Registro</span>
-                        <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Onboarding/02.png" class="h-32 sm:h-48 lg:h-64 object-contain rounded-xl mockup-shadow group-hover:lg:h-80 transition-all duration-300" alt="">
+                        <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Onboarding/02.png" class="h-28 sm:h-48 lg:h-64 object-contain rounded-xl mockup-shadow group-hover:lg:h-80 transition-all duration-300" alt="" onerror="this.src='https://placehold.co/150x300/f97316/ffffff?text=Paso+2'"/>
                     </div>
                     <!-- Item 03 -->
                     <div class="onboarding-item flex flex-col items-center gap-1 sm:gap-2 group w-full pt-4">
-                        <span class="onboarding-tooltip hidden lg:block">Paso 3: Elige tu Rubro (Retail, Comida, Servicios)</span>
+                        <span class="onboarding-tooltip hidden lg:block">Paso 3: Elige tu Rubro</span>
                         <span class="text-xs font-bold text-orange-500 bg-orange-50 px-2 py-1 rounded-full">03. Rubro</span>
-                        <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Onboarding/03.png" class="h-32 sm:h-48 lg:h-64 object-contain rounded-xl mockup-shadow group-hover:lg:h-80 transition-all duration-300" alt="">
+                        <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Onboarding/03.png" class="h-28 sm:h-48 lg:h-64 object-contain rounded-xl mockup-shadow group-hover:lg:h-80 transition-all duration-300" alt="" onerror="this.src='https://placehold.co/150x300/f97316/ffffff?text=Paso+3'"/>
                     </div>
                     <!-- Item 04 -->
                     <div class="onboarding-item flex flex-col items-center gap-1 sm:gap-2 group w-full pt-4">
-                        <span class="onboarding-tooltip hidden lg:block">Paso 4: Define tu Categoría (Personaliza la experiencia)</span>
+                        <span class="onboarding-tooltip hidden lg:block">Paso 4: Define tu Categoría</span>
                         <span class="text-xs font-bold text-orange-500 bg-orange-50 px-2 py-1 rounded-full">04. Categoría</span>
-                        <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Onboarding/04.png" class="h-32 sm:h-48 lg:h-64 object-contain rounded-xl mockup-shadow group-hover:lg:h-80 transition-all duration-300" alt="">
+                        <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Onboarding/04.png" class="h-28 sm:h-48 lg:h-64 object-contain rounded-xl mockup-shadow group-hover:lg:h-80 transition-all duration-300" alt="" onerror="this.src='https://placehold.co/150x300/f97316/ffffff?text=Paso+4'"/>
                     </div>
                     <!-- Item 05 -->
                     <div class="onboarding-item flex flex-col items-center gap-1 sm:gap-2 group w-full pt-4">
-                        <span class="onboarding-tooltip hidden lg:block">Paso 5: Nombre y Ubicación de tu Tienda</span>
+                        <span class="onboarding-tooltip hidden lg:block">Paso 5: Nombre y Ubicación</span>
                         <span class="text-xs font-bold text-orange-500 bg-orange-50 px-2 py-1 rounded-full">05. Tienda</span>
-                        <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Onboarding/05.png" class="h-32 sm:h-48 lg:h-64 object-contain rounded-xl mockup-shadow group-hover:lg:h-80 transition-all duration-300" alt="">
+                        <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Onboarding/05.png" class="h-28 sm:h-48 lg:h-64 object-contain rounded-xl mockup-shadow group-hover:lg:h-80 transition-all duration-300" alt="" onerror="this.src='https://placehold.co/150x300/f97316/ffffff?text=Paso+5'"/>
                     </div>
                     <!-- Item 06 -->
                     <div class="onboarding-item flex flex-col items-center gap-1 sm:gap-2 group w-full pt-4">
-                        <span class="onboarding-tooltip hidden lg:block">Paso 6: ¡En la App en menos de 2 minutos!</span>
+                        <span class="onboarding-tooltip hidden lg:block">Paso 6: ¡En la App!</span>
                         <span class="text-xs font-bold text-orange-500 bg-orange-50 px-2 py-1 rounded-full">06. ¡Listo!</span>
-                        <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Onboarding/06.png" class="h-32 sm:h-48 lg:h-64 object-contain rounded-xl mockup-shadow group-hover:lg:h-80 transition-all duration-300" alt="">
+                        <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Onboarding/06.png" class="h-28 sm:h-48 lg:h-64 object-contain rounded-xl mockup-shadow group-hover:lg:h-80 transition-all duration-300" alt="" onerror="this.src='https://placehold.co/150x300/f97316/ffffff?text=Paso+6'"/>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 3: DASHBOARDS (Responsive Grid) -->
+        <!-- SLIDE 3: DASHBOARDS (Salud del Negocio) -->
         <div class="slide" data-title="Roles Inteligentes y Dashboards">
             <div class="max-w-7xl mx-auto px-4 sm:px-8 w-full">
                 <div class="text-center mb-6 sm:mb-10">
                     <h2 class="text-3xl sm:text-4xl font-bold text-slate-900">Salud del Negocio en Tiempo Real</h2>
                     <p class="text-sm sm:text-lg text-slate-600">Paz mental para el dueño: Visibilidad completa de ganancias, gastos e inventario.</p>
                 </div>
-
-                <!-- Responsividad: 1 columna en móvil, 2 en escritorio -->
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-12">
-                    <!-- Admin -->
                     <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-xl border-t-4 border-blue-600 flex flex-col">
                         <div class="flex items-center gap-3 mb-4">
                             <div class="p-2 bg-blue-100 rounded-lg text-blue-600"><i data-lucide="briefcase" class="w-5 h-5 sm:w-6 sm:h-6"></i></div>
                             <h3 class="text-lg sm:text-xl font-bold text-slate-800">Vista Dueño (Salud Financiera)</h3>
                         </div>
                         <div class="bg-slate-100 rounded-lg overflow-hidden border border-slate-200 h-64 sm:h-96 flex-grow-0"> 
-                            <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Dasboard/admin.png" class="w-full h-full object-contain" alt="[Image of Admin Dashboard]">
+                            <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Dasboard/admin.png" class="w-full h-full object-contain" alt="" onerror="this.src='https://placehold.co/600x400/0891b2/ffffff?text=Admin+Dashboard'"/>
                         </div>
                         <p class="mt-3 sm:mt-4 text-xs sm:text-sm text-slate-500">Ventas vs. Gastos. Inventario bajo control. Deja de sumar facturas y empieza a planear.</p>
                     </div>
-
-                    <!-- Cajero -->
                     <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-xl border-t-4 border-green-500 flex flex-col">
                         <div class="flex items-center gap-3 mb-4">
                             <div class="p-2 bg-green-100 rounded-lg text-green-600"><i data-lucide="shopping-cart" class="w-5 h-5 sm:w-6 sm:h-6"></i></div>
                             <h3 class="text-lg sm:text-xl font-bold text-slate-800">Vista Cajero (POS Móvil)</h3>
                         </div>
                         <div class="bg-slate-100 rounded-lg overflow-hidden border border-slate-200 h-64 sm:h-96 flex-grow-0">
-                            <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Dasboard/cajero.png" class="w-full h-full object-contain" alt="">
+                            <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Dasboard/cajero.png" class="w-full h-full object-contain" alt="" onerror="this.src='https://placehold.co/600x400/10b981/ffffff?text=Cashier+Dashboard'"/>
                         </div>
                         <p class="mt-3 sm:mt-4 text-xs sm:text-sm text-slate-500">Interfaz rápida enfocada solo en facturación y control de caja.</p>
                     </div>
@@ -339,7 +350,219 @@
             </div>
         </div>
 
-        <!-- SLIDE 4: PRODUCTOS (Responsive Grid) -->
+        <!-- SLIDE 4: CENTRO DE MANDO INTELIGENTE (Nuevo) -->
+        <div class="slide" data-title="Centro de Mando Inteligente">
+            <div class="max-w-6xl mx-auto px-4 sm:px-8 w-full h-full flex flex-col justify-center py-8 sm:py-0">
+                <div class="text-center mb-8">
+                    <span class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Gestión Proactiva</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mt-2">Todo tu negocio en un vistazo</h2>
+                    <p class="text-slate-600">Lani no solo registra datos, te dice dónde poner atención.</p>
+                </div>
+
+                <!-- Diseño responsivo: 1 columna en móvil, 2 columnas en pantallas medianas (md) y superiores -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                    <!-- Columna Izquierda: Alertas de Gestión -->
+                    <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-lg border border-slate-100">
+                        <h3 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                            <i data-lucide="alert-triangle" class="text-amber-500 w-5 h-5"></i> Necesita tu atención
+                        </h3>
+                        
+                        <div class="space-y-3">
+                            <div class="alert-card hover:bg-slate-50 transition-colors cursor-pointer group">
+                                <div class="flex items-center gap-3">
+                                    <div class="p-2 bg-orange-100 text-orange-600 rounded-lg"><i data-lucide="package" class="w-5 h-5"></i></div>
+                                    <div>
+                                        <p class="font-bold text-slate-700 text-sm sm:text-base">Inventario Bajo</p>
+                                        <p class="text-xs text-slate-500">3 productos a punto de agotarse</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs font-bold text-blue-600 group-hover:underline">Ver lista</span>
+                            </div>
+
+                            <div class="alert-card hover:bg-slate-50 transition-colors cursor-pointer group">
+                                <div class="flex items-center gap-3">
+                                    <div class="p-2 bg-red-100 text-red-600 rounded-lg"><i data-lucide="hourglass" class="w-5 h-5"></i></div>
+                                    <div>
+                                        <p class="font-bold text-slate-700 text-sm sm:text-base">Por Vencer</p>
+                                        <p class="text-xs text-slate-500">2 lotes con fecha límite</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs font-bold text-blue-600 group-hover:underline">Revisar</span>
+                            </div>
+
+                            <div class="alert-card hover:bg-slate-50 transition-colors cursor-pointer group">
+                                <div class="flex items-center gap-3">
+                                    <div class="p-2 bg-purple-100 text-purple-600 rounded-lg"><i data-lucide="banknote" class="w-5 h-5"></i></div>
+                                    <div>
+                                        <p class="font-bold text-slate-700 text-sm sm:text-base">Cuentas por Pagar</p>
+                                        <p class="text-xs text-slate-500">1 factura vencida</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs font-bold text-blue-600 group-hover:underline">Pagar</span>
+                            </div>
+
+                            <div class="alert-card hover:bg-slate-50 transition-colors cursor-pointer group">
+                                <div class="flex items-center gap-3">
+                                    <div class="p-2 bg-blue-100 text-blue-600 rounded-lg"><i data-lucide="calendar" class="w-5 h-5"></i></div>
+                                    <div>
+                                        <p class="font-bold text-slate-700 text-sm sm:text-base">Cuentas por Cobrar</p>
+                                        <p class="text-xs text-slate-500">2 clientes en mora</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs font-bold text-blue-600 group-hover:underline">Cobrar</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Columna Derecha: Sucursales y Gráfico -->
+                    <div class="space-y-6">
+                        <!-- Sucursales -->
+                        <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-lg border border-slate-100">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="text-lg font-bold text-slate-800 flex items-center gap-2">
+                                    <i data-lucide="store" class="text-blue-500 w-5 h-5"></i> Gestión de Sucursales
+                                </h3>
+                                <span class="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded-md font-bold cursor-pointer flex items-center gap-1">
+                                    <i data-lucide="plus" class="w-3 h-3"></i> Nueva
+                                </span>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                                    <div>
+                                        <p class="font-bold text-slate-700 text-sm">Sucursal Principal</p>
+                                        <p class="text-xs text-green-600 flex items-center gap-1"><span class="w-2 h-2 bg-green-500 rounded-full"></span> 2 cajas abiertas</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="font-bold text-slate-800 text-sm">C$ 3,450</p>
+                                        <p class="text-xs text-slate-400">Venta Hoy</p>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center p-3 bg-slate-50 rounded-lg">
+                                    <div>
+                                        <p class="font-bold text-slate-700 text-sm">Bodega Mercado</p>
+                                        <p class="text-xs text-green-600 flex items-center gap-1"><span class="w-2 h-2 bg-green-500 rounded-full"></span> 1 caja abierta</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="font-bold text-slate-800 text-sm">C$ 1,520</p>
+                                        <p class="text-xs text-slate-400">Venta Hoy</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Gráfico Simulado -->
+                        <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-lg border border-slate-100">
+                            <h3 class="text-sm font-bold text-slate-500 mb-4 flex items-center gap-2">
+                                <i data-lucide="bar-chart-2" class="w-4 h-4"></i> Ventas últimos 7 días
+                            </h3>
+                            <!-- Gráfico responsivo por altura basada en porcentajes -->
+                            <div class="flex items-end justify-between h-32 gap-2">
+                                <div class="w-full bg-blue-100 rounded-t-sm h-[40%] hover:bg-blue-200 transition-all"></div>
+                                <div class="w-full bg-blue-200 rounded-t-sm h-[60%] hover:bg-blue-300 transition-all"></div>
+                                <div class="w-full bg-blue-300 rounded-t-sm h-[30%] hover:bg-blue-400 transition-all"></div>
+                                <div class="w-full bg-blue-400 rounded-t-sm h-[80%] hover:bg-blue-500 transition-all"></div>
+                                <div class="w-full bg-blue-500 rounded-t-sm h-[50%] hover:bg-blue-600 transition-all"></div>
+                                <div class="w-full bg-indigo-500 rounded-t-sm h-[90%] hover:bg-indigo-600 transition-all"></div>
+                                <div class="w-full bg-orange-500 rounded-t-sm h-[70%] hover:bg-orange-600 transition-all"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: CAJA SIMPLIFICADA (Nuevo) -->
+        <div class="slide" data-title="Operación de Caja Simplificada">
+            <div class="max-w-md mx-auto w-full h-full flex flex-col justify-center py-8 sm:py-0">
+                <!-- Marco del Teléfono -->
+                <div class="bg-white rounded-[2rem] border-8 border-slate-800 shadow-2xl overflow-hidden h-[650px] relative flex flex-col w-full">
+                    <!-- Barra Superior -->
+                    <div class="bg-slate-800 p-4 text-white">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-xs opacity-80">Hola, Carlos!</p>
+                                <p class="font-bold text-sm flex items-center gap-1"><span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span> Caja 1 (Principal)</p>
+                            </div>
+                            <div class="w-8 h-8 bg-slate-600 rounded-full flex items-center justify-center font-bold text-sm">C</div>
+                        </div>
+                    </div>
+
+                    <!-- Cuerpo de la App (Scrollable) -->
+                    <div class="bg-slate-50 flex-grow p-4 overflow-y-auto custom-scroll">
+                        <!-- Métricas Clave (Ingresos, Egresos, Efectivo) -->
+                        <div class="grid grid-cols-3 gap-2 mb-6">
+                            <div class="bg-white p-2 rounded-xl text-center shadow-sm border border-slate-100">
+                                <p class="text-[10px] text-slate-400 font-bold uppercase">Ingresos</p>
+                                <p class="text-xs font-bold text-green-600">C$ 4,500</p>
+                            </div>
+                            <div class="bg-white p-2 rounded-xl text-center shadow-sm border border-slate-100">
+                                <p class="text-[10px] text-slate-400 font-bold uppercase">Egresos</p>
+                                <p class="text-xs font-bold text-red-500">C$ 150</p>
+                            </div>
+                            <div class="bg-slate-800 p-2 rounded-xl text-center shadow-sm text-white">
+                                <p class="text-[10px] text-slate-400 font-bold uppercase">En Gaveta</p>
+                                <p class="text-xs font-bold text-amber-400">C$ 4,350</p>
+                            </div>
+                        </div>
+
+                        <!-- Acciones Principales -->
+                        <div class="grid grid-cols-2 gap-3 mb-6">
+                            <button class="bg-blue-600 text-white p-4 rounded-2xl shadow-lg shadow-blue-200 hover:bg-blue-700 active:scale-95 transition-all flex flex-col items-center justify-center gap-2">
+                                <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+                                <span class="font-bold text-sm">Registrar Venta</span>
+                            </button>
+                            <div class="grid grid-rows-2 gap-3">
+                                <button class="bg-white text-slate-700 p-2 rounded-xl shadow-sm border border-slate-200 hover:bg-slate-50 flex items-center justify-center gap-2">
+                                    <i data-lucide="minus-circle" class="w-4 h-4 text-red-500"></i>
+                                    <span class="text-xs sm:text-sm font-semibold">Registrar Gasto</span>
+                                </button>
+                                <button class="bg-white text-slate-700 p-2 rounded-xl shadow-sm border border-slate-200 hover:bg-slate-50 flex items-center justify-center gap-2">
+                                    <i data-lucide="archive" class="w-4 h-4 text-slate-500"></i>
+                                    <span class="text-xs sm:text-sm font-semibold">Cerrar Caja</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Transacciones Recientes -->
+                        <h4 class="text-sm font-bold text-slate-700 mb-3 px-1">Últimas Transacciones</h4>
+                        <div class="space-y-2">
+                            <div class="bg-white p-3 rounded-xl border border-slate-100 flex justify-between items-center">
+                                <div class="flex items-center gap-3">
+                                    <div class="p-2 bg-green-50 text-green-600 rounded-lg"><i data-lucide="dollar-sign" class="w-4 h-4"></i></div>
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-800">Venta Cliente 001</p>
+                                        <p class="text-[10px] text-slate-400">Hace 5 min</p>
+                                    </div>
+                                </div>
+                                <span class="text-sm font-bold text-green-600">+ C$ 1,200</span>
+                            </div>
+                            <div class="bg-white p-3 rounded-xl border border-slate-100 flex justify-between items-center">
+                                <div class="flex items-center gap-3">
+                                    <div class="p-2 bg-red-50 text-red-500 rounded-lg"><i data-lucide="receipt" class="w-4 h-4"></i></div>
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-800">Pago Proveedor</p>
+                                        <p class="text-[10px] text-slate-400">Hace 15 min</p>
+                                    </div>
+                                </div>
+                                <span class="text-sm font-bold text-red-500">- C$ 150</span>
+                            </div>
+                            <div class="bg-white p-3 rounded-xl border border-slate-100 flex justify-between items-center">
+                                <div class="flex items-center gap-3">
+                                    <div class="p-2 bg-green-50 text-green-600 rounded-lg"><i data-lucide="dollar-sign" class="w-4 h-4"></i></div>
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-800">Venta Cliente 002</p>
+                                        <p class="text-[10px] text-slate-400">Hace 25 min</p>
+                                    </div>
+                                </div>
+                                <span class="text-sm font-bold text-green-600">+ C$ 900</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 6: GESTIÓN DE PRODUCTOS -->
         <div class="slide" data-title="Gestión de Inventario y Catálogo">
             <div class="max-w-6xl mx-auto px-4 sm:px-8 w-full grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                 <div class="space-y-4 sm:space-y-6 pt-6 lg:pt-0">
@@ -359,28 +582,30 @@
                         </li>
                     </ul>
                 </div>
-                <div class="flex gap-2 sm:gap-4 justify-center h-[350px] sm:h-[550px] pt-4 lg:pt-0">
-                    <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Product/01.png" class="h-full object-contain rounded-xl mockup-shadow" alt="">
-                    <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Product/02.png" class="h-full object-contain rounded-xl mockup-shadow" alt="[Image of Product Details]">
+                <!-- Diseño responsivo: Imágenes apiladas en móvil, lado a lado en desktop -->
+                <div class="flex gap-2 sm:gap-4 justify-center h-[300px] sm:h-[400px] lg:h-[550px] pt-4 lg:pt-0">
+                    <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Product/01.png" class="h-full object-contain rounded-xl mockup-shadow" alt="" onerror="this.src='https://placehold.co/250x500/f97316/ffffff?text=Cat%C3%A1logo'"/>
+                    <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/Product/02.png" class="h-full object-contain rounded-xl mockup-shadow" alt="" onerror="this.src='https://placehold.co/250x500/f97316/ffffff?text=Detalle'"/>
                 </div>
             </div>
         </div>
-        
-        <!-- SLIDE 5: ECOSISTEMA DUAL (Fondo Azul) -->
+
+        <!-- SLIDE 7: ECOSISTEMA DUAL -->
         <div class="slide" data-title="El Ecosistema Dual: Marketplace">
+            <!-- Contenedor responsivo con fondo de color -->
             <div class="max-w-7xl mx-auto px-4 sm:px-8 w-full h-full bg-blue-600 text-white flex flex-col justify-center items-center rounded-xl shadow-2xl m-2 sm:m-8">
                 <div class="text-center space-y-4 sm:space-y-8 p-4">
                     <div class="p-3 sm:p-4 bg-white/10 rounded-full inline-block">
                         <i data-lucide="zap" class="w-8 h-8 sm:w-12 sm:h-12 text-white"></i>
                     </div>
                     <h2 class="text-3xl sm:text-5xl font-extrabold">La Magia del Ecosistema Dual</h2>
-                    <p class="text-lg sm:text-2xl font-light max-w-3xl">
+                    <p class="text-lg sm:text-2xl font-light max-w-3xl mx-auto">
                         Tu inventario, una vez organizado en el módulo de gestión, ya no está "escondido". Con un solo clic, se vuelve visible para clientes en todo el territorio a través de nuestro Marketplace.
                     </p>
                     <p class="text-xl sm:text-3xl font-bold text-amber-300">
                         Unimos tu Operación Interna con el Crecimiento de Ventas.
                     </p>
-                    <!-- Responsividad: Los bloques se apilan en móvil -->
+                    <!-- Flexbox responsivo: Columna en móvil, fila en sm y superior -->
                     <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-8 pt-4">
                         <div class="p-3 bg-white/20 rounded-xl flex items-center justify-center gap-3 text-sm sm:text-base">
                             <i data-lucide="settings" class="w-5 h-5 sm:w-6 sm:h-6"></i>
@@ -397,44 +622,46 @@
             </div>
         </div>
 
-        <!-- SLIDE 6: MARKETPLACE (Responsive Grid) -->
+        <!-- SLIDE 8: MARKETPLACE (Comprador/Comerciante) - CORREGIDO PARA RESPONSIVIDAD -->
         <div class="slide" data-title="El Marketplace: Ventas y Control">
             <div class="max-w-7xl mx-auto px-4 sm:px-8 w-full">
                 <div class="text-center mb-6 sm:mb-10">
-                    <h2 class="text-3xl sm:text-4xl font-bold text-slate-900">Marketplace: Visibilidad para el Comprador y Control para el Comerciante</h2>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-slate-900">Marketplace: Visibilidad y Control</h2>
                     <p class="text-sm sm:text-lg text-slate-600">Fase 2: Conviértete en un líder de ventas en tu región.</p>
                 </div>
 
-                <!-- Responsividad: 1 columna en móvil, 2 en escritorio -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-12">
-                    <!-- Vista Comprador -->
+                <!-- CAMBIO: Utilizamos grid-cols-1 por defecto y lg:grid-cols-2 en pantallas grandes para apilar correctamente en móvil -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-12 items-start">
+                    <!-- Columna 1: Vista del Comprador -->
                     <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-xl border-t-4 border-orange-500 flex flex-col">
                         <div class="flex items-center gap-3 mb-4">
                             <div class="p-2 bg-orange-100 rounded-lg text-orange-600"><i data-lucide="user" class="w-5 h-5 sm:w-6 sm:h-6"></i></div>
-                            <h3 class="text-lg sm:text-xl font-bold text-slate-800">Vista del Comprador (Front-End)</h3>
+                            <h3 class="text-lg sm:text-xl font-bold text-slate-800">Vista del Comprador</h3>
                         </div>
-                        <div class="bg-slate-100 rounded-lg overflow-hidden border border-slate-200 h-64 sm:h-96 flex-grow-0"> 
-                            <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/tienda/01.png" class="w-full h-full object-contain" alt="">
+                        <!-- Altura responsiva, se adapta mejor a la columna -->
+                        <div class="bg-slate-100 rounded-lg overflow-hidden border border-slate-200 h-72 sm:h-80 lg:h-96 flex-grow-0"> 
+                            <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/tienda/01.png" class="w-full h-full object-contain" alt="" onerror="this.src='https://placehold.co/600x400/f97316/ffffff?text=Marketplace+Comprador'"/>
                         </div>
                         <p class="mt-3 sm:mt-4 text-xs sm:text-sm text-slate-500">Un catálogo moderno y accesible que atrae a miles de clientes.</p>
                     </div>
 
-                    <!-- Control Comerciante -->
+                    <!-- Columna 2: Control de Producto -->
                     <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-xl border-t-4 border-purple-500 flex flex-col">
                         <div class="flex items-center gap-3 mb-4">
                             <div class="p-2 bg-purple-100 rounded-lg text-purple-600"><i data-lucide="trolley" class="w-5 h-5 sm:w-6 sm:h-6"></i></div>
-                            <h3 class="text-lg sm:text-xl font-bold text-slate-800">Control de Producto (Back-End)</h3>
+                            <h3 class="text-lg sm:text-xl font-bold text-slate-800">Control de Producto</h3>
                         </div>
-                        <div class="bg-slate-100 rounded-lg overflow-hidden border border-slate-200 h-64 sm:h-96 flex-grow-0">
-                            <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/tienda/02.png" class="w-full h-full object-contain" alt="">
+                        <!-- Altura responsiva, se adapta mejor a la columna -->
+                        <div class="bg-slate-100 rounded-lg overflow-hidden border border-slate-200 h-72 sm:h-80 lg:h-96 flex-grow-0">
+                            <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/tienda/02.png" class="w-full h-full object-contain" alt="" onerror="this.src='https://placehold.co/600x400/9333ea/ffffff?text=Control+de+Tienda'"/>
                         </div>
-                        <p class="mt-3 sm:mt-4 text-xs sm:text-sm text-slate-500">Gestiona precios, inventario y promociones del marketplace de forma centralizada.</p>
+                        <p class="mt-3 sm:mt-4 text-xs sm:text-sm text-slate-500">Gestiona precios, inventario y promociones del marketplace.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- SLIDE 7: FLUJO DE VENTAS (POS) - Responsive Horizontal Scroll -->
+        <!-- SLIDE 9: FLUJO DE VENTAS (POS) -->
         <div class="slide" data-title="Punto de Venta (POS) Móvil">
             <div class="max-w-7xl mx-auto px-4 w-full flex flex-col justify-center">
                 <div class="text-center mb-6">
@@ -442,51 +669,40 @@
                     <p class="text-sm sm:text-base text-slate-600">Desde la apertura hasta el cobro final.</p>
                 </div>
                 
-                <!-- Contenedor con scroll horizontal para móviles -->
+                <!-- Contenedor con scroll horizontal para pantallas pequeñas -->
                 <div class="flex flex-row overflow-x-auto gap-4 sm:gap-6 items-center justify-start sm:justify-center pb-4 lg:pb-0">
-                    
-                    <!-- Paso 1: Apertura -->
                     <div class="text-center min-w-[150px] sm:min-w-[200px]">
                         <div class="bg-white p-2 rounded-xl shadow-md border border-slate-100 mb-2">
-                            <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/venta/01.png" class="h-48 sm:h-64 mx-auto object-contain rounded-lg" alt="">
+                            <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/venta/01.png" class="h-48 sm:h-64 mx-auto object-contain rounded-lg" alt="" onerror="this.src='https://placehold.co/150x250/3b82f6/ffffff?text=Apertura'"/>
                         </div>
                         <span class="text-xs sm:text-sm font-bold text-slate-700">1. Apertura Caja</span>
                     </div>
-
                     <i data-lucide="arrow-right" class="text-slate-300 w-6 h-6 sm:w-8 sm:h-8 min-w-[24px]"></i>
-
-                    <!-- Paso 2: Selección (Venta 03) -->
                     <div class="text-center min-w-[150px] sm:min-w-[200px]">
                         <div class="bg-white p-2 rounded-xl shadow-md border border-slate-100 mb-2">
-                            <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/venta/03.png" class="h-48 sm:h-64 mx-auto object-contain rounded-lg" alt="">
+                            <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/venta/03.png" class="h-48 sm:h-64 mx-auto object-contain rounded-lg" alt="" onerror="this.src='https://placehold.co/150x250/3b82f6/ffffff?text=Selecci%C3%B3n'"/>
                         </div>
                         <span class="text-xs sm:text-sm font-bold text-slate-700">2. Selección</span>
                     </div>
-
                     <i data-lucide="arrow-right" class="text-slate-300 w-6 h-6 sm:w-8 sm:h-8 min-w-[24px]"></i>
-
-                    <!-- Paso 3: Detalle/Cobro (Venta 05) -->
                     <div class="text-center min-w-[150px] sm:min-w-[200px]">
                         <div class="bg-white p-2 rounded-xl shadow-md border border-slate-100 mb-2">
-                            <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/venta/05.png" class="h-48 sm:h-64 mx-auto object-contain rounded-lg" alt="[Image of Payment Success]">
+                            <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/venta/05.png" class="h-48 sm:h-64 mx-auto object-contain rounded-lg" alt="" onerror="this.src='https://placehold.co/150x250/3b82f6/ffffff?text=Cobro'"/>
                         </div>
                         <span class="text-xs sm:text-sm font-bold text-slate-700">3. Cobro Exitoso</span>
                     </div>
-
                     <div class="w-px h-56 sm:h-64 bg-slate-200 mx-2 sm:mx-4 min-w-[1px]"></div>
-
-                    <!-- Paso 4: Cierre (Venta 02) -->
                     <div class="text-center min-w-[150px] sm:min-w-[200px] opacity-80">
                          <div class="bg-slate-50 p-2 rounded-xl border border-dashed border-slate-300 mb-2">
-                            <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/venta/02.png" class="h-48 sm:h-64 mx-auto object-contain rounded-lg grayscale" alt="">
+                            <img src="https://github.com/devlaniapp/LaniEntreprice/raw/main/venta/02.png" class="h-48 sm:h-64 mx-auto object-contain rounded-lg grayscale" alt="" onerror="this.src='https://placehold.co/150x250/94a3b8/ffffff?text=Cierre'"/>
                         </div>
                         <span class="text-xs sm:text-sm font-bold text-slate-500">4. Cierre de Turno</span>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <!-- SLIDE 8: CIERRE (Responsive Buttons) -->
+
+        <!-- SLIDE 10: CIERRE -->
         <div class="slide" data-title="Llamada a la Acción">
             <div class="max-w-4xl mx-auto text-center px-4 sm:px-0">
                 <div class="mb-6 sm:mb-8 flex justify-center">
@@ -498,14 +714,12 @@
                 <p class="text-base sm:text-xl text-slate-600 mb-8 sm:mb-12">
                     Lani combina la simplicidad que las PYMES necesitan con la tecnología que impulsa su crecimiento.
                 </p>
-                <!-- Responsividad: Botones apilados en móvil, en fila en escritorio -->
+                <!-- Botones responsivos: apilados en móvil, en fila en sm y superior -->
                 <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
-                    <!-- Botón Descargar App (Abre el mockup de la landing page) -->
                     <a href="https://dereck48g.github.io/Lani-pick-deck-landing/" target="_blank" class="bg-slate-900 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-xl font-bold flex items-center justify-center gap-3 hover:bg-slate-800 transition-all hover:scale-[1.02] sm:hover:scale-105 shadow-xl text-base sm:text-lg">
                         Ver Demo Landing
                         <i data-lucide="external-link" class="w-5 h-5"></i>
                     </a>
-                    <!-- Botón Contacto (Abre el modal con los números) -->
                     <button onclick="openModal()" class="bg-white text-slate-900 border-2 border-slate-200 px-6 py-3 sm:px-8 sm:py-4 rounded-xl font-bold flex items-center justify-center gap-3 hover:border-orange-500 hover:text-orange-500 transition-all text-base sm:text-lg">
                         Contactar Equipo
                         <i data-lucide="users" class="w-5 h-5"></i>
@@ -517,108 +731,78 @@
     </div>
 
     <script>
-        // Inicializar Iconos
         lucide.createIcons();
-
-        // Lógica del Slider
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
         const progressBar = document.getElementById('progress');
         const totalSlides = slides.length;
-        // Elementos del indicador de slide
-        const totalSlideCountEl = document.getElementById('total-slide-count');
-        const currentSlideNumberEl = document.getElementById('current-slide-number');
-        const currentSlideTitleEl = document.getElementById('current-slide-title');
+        const currentSlideNumber = document.getElementById('current-slide-number');
+        const totalSlideCount = document.getElementById('total-slide-count');
+        const currentSlideTitle = document.getElementById('current-slide-title');
         
-        // Elementos del Modal
-        const contactModal = document.getElementById('contact-modal');
+        totalSlideCount.textContent = totalSlides;
 
-
-        /**
-         * Abre el modal de contacto.
-         */
-        function openModal() {
-            contactModal.classList.add('open');
-            // Re-renderizar iconos en el modal
-            lucide.createIcons(); 
-        }
-
-        /**
-         * Cierra el modal de contacto.
-         */
-        function closeModal() {
-            contactModal.classList.remove('open');
-        }
-
-        /**
-         * Actualiza el ancho de la barra de progreso.
-         */
-        function updateProgress() {
-            // Calcula el porcentaje basado en la diapositiva actual
-            const width = ((currentSlide + 1) / totalSlides) * 100;
-            progressBar.style.width = width + '%';
-        }
-
-        /**
-         * Muestra la diapositiva en el índice dado, ocultando las demás.
-         * @param {number} index - El índice de la diapositiva a mostrar.
-         */
-        function showSlide(index) {
+        function updateSlide(index) {
+            // Lógica para loop de slides
+            if (index < 0) index = totalSlides - 1; 
+            else if (index >= totalSlides) index = 0; 
+            
+            currentSlide = index;
             slides.forEach((slide, i) => {
                 slide.classList.remove('active');
-                if (i === index) {
-                    slide.classList.add('active');
-                    // Actualiza el indicador de slide
-                    currentSlideNumberEl.textContent = i + 1;
-                    currentSlideTitleEl.textContent = slide.getAttribute('data-title');
-                    // Asegura que el slide se muestre arriba si hay scroll interno
-                    slide.scrollTop = 0; 
-                }
+                if (i === currentSlide) slide.classList.add('active');
             });
-            updateProgress();
-        }
 
-        /**
-         * Cambia a la siguiente o anterior diapositiva.
-         * @param {number} direction - 1 para siguiente, -1 para anterior.
-         */
-        function changeSlide(direction) {
-            // Asegúrate de cerrar el modal si está abierto antes de cambiar de slide
-            closeModal(); 
+            // Actualiza el indicador y la barra de progreso
+            currentSlideNumber.textContent = currentSlide + 1;
+            currentSlideTitle.textContent = slides[currentSlide].getAttribute('data-title');
             
-            let newIndex = currentSlide + direction;
+            const progressPercent = (currentSlide + 1) / totalSlides * 100;
+            progressBar.style.width = `${progressPercent}%`;
             
-            // Lógica de loop infinito
-            if (newIndex >= totalSlides) {
-                newIndex = 0; // Vuelve al inicio
-            } else if (newIndex < 0) {
-                newIndex = totalSlides - 1; // Vuelve al final
+            // Re-renderizar iconos en el slide activo (es necesario para Lucide)
+            lucide.createIcons();
+            
+            // Forzar el scroll al inicio del contenido del slide (si aplica)
+            if (slides[currentSlide]) {
+                slides[currentSlide].scrollTop = 0;
             }
-            
-            currentSlide = newIndex;
-            showSlide(currentSlide);
         }
 
-        // Event Listeners para navegación con teclado
-        document.addEventListener('keydown', (e) => {
-            // No cambiar de slide si el modal está abierto
-            if (contactModal.classList.contains('open')) return; 
+        function changeSlide(direction) {
+            updateSlide(currentSlide + direction);
+        }
 
-            if (e.key === 'ArrowRight') {
-                changeSlide(1); // Siguiente
+        // Listener para teclas de flecha y espacio
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                changeSlide(1);
             } else if (e.key === 'ArrowLeft') {
-                changeSlide(-1); // Anterior
-            } else if (e.key === 'Escape') {
-                closeModal(); // Cierra el modal con ESC
+                changeSlide(-1);
             }
         });
 
-        // Inicializa la presentación al cargar la ventana
-        window.onload = () => {
-             // Inicializa el contador total
-            totalSlideCountEl.textContent = totalSlides;
-            showSlide(currentSlide);
-        };
+        // Funciones del Modal (Ventana Emergente de Contacto)
+        const modal = document.getElementById('contact-modal');
+        function openModal() {
+            modal.classList.add('open');
+            // Re-renderizar iconos dentro del modal
+            lucide.createIcons();
+        }
+        function closeModal() {
+            modal.classList.remove('open');
+        }
+        // Cerrar modal al hacer clic fuera
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Inicializa la presentación al cargar
+        document.addEventListener('DOMContentLoaded', () => {
+            updateSlide(0);
+        });
     </script>
 </body>
 </html>
